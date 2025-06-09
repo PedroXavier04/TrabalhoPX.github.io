@@ -1,0 +1,51 @@
+[33mcommit 8c9acc4bb4300e9e73d372cfa18511be7e05e378[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: euericsoncosta <costaericson@hotmail.com>
+Date:   Wed May 14 15:29:38 2025 -0300
+
+    Segundo Comit
+
+[1mdiff --git a/.env b/.env[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e69de29[m
+[1mdiff --git a/.gitignore b/.gitignore[m
+[1mindex 0cad632..30fb3b3 100644[m
+[1m--- a/.gitignore[m
+[1m+++ b/.gitignore[m
+[36m@@ -1,37 +1,3 @@[m
+ # Dependências[m
+ node_modules/[m
+ [m
+[31m-# Logs[m
+[31m-logs[m
+[31m-*.log[m
+[31m-npm-debug.log*[m
+[31m-yarn-debug.log*[m
+[31m-yarn-error.log*[m
+[31m-[m
+[31m-# Variáveis de ambiente[m
+[31m-.env[m
+[31m-.env.local[m
+[31m-.env.*.local[m
+[31m-[m
+[31m-# Diretórios de build[m
+[31m-dist/[m
+[31m-build/[m
+[31m-.cache/[m
+[31m-[m
+[31m-# Arquivos do sistema[m
+[31m-.DS_Store[m
+[31m-Thumbs.db[m
+[31m-[m
+[31m-# Diretórios de editores[m
+[31m-.vscode/[m
+[31m-.idea/[m
+[31m-[m
+[31m-# Testes[m
+[31m-coverage/[m
+[31m-.nyc_output/[m
+[31m-[m
+[31m-# Arquivos temporários[m
+[31m-*.swp[m
+[31m-*.swo[m
+[31m-*.bak[m
+[31m-*.tmp[m

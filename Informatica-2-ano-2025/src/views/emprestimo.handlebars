@@ -1,0 +1,78 @@
+<h2>Cadastro de Empréstimos</h2>
+<form action="/emprestimos" method="post">
+  <label for="idAluno">Aluno:</label>
+  <select id="idAluno" name="idAluno" required>
+    <option value="">Selecione o aluno</option>
+    {{#each alunos}}
+      {{#if this.ativo}}
+        <option value="{{this.id}}">{{this.nome}}</option>
+      {{/if}}
+    {{/each}}
+  </select>
+
+  <label for="idLivro">Livro:</label>
+  <select id="idLivro" name="idLivro" required>
+    <option value="">Selecione o livro</option>
+    {{#each livros}}
+      {{#if this.ativo}}
+        <option value="{{this.id}}">{{this.titulo}}</option>
+      {{/if}}
+    {{/each}}
+  </select>
+
+  <label for="dataEmprestimo">Data do Empréstimo:</label>
+  <input type="date" id="dataEmprestimo" name="dataEmprestimo" required value="{{hojeISO}}" />
+
+  <button type="submit">Cadastrar Empréstimo</button>
+</form>
+
+<hr />
+
+<h2>Lista de Empréstimos</h2>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Aluno</th>
+      <th>Livro</th>
+      <th>Data Empréstimo</th>
+      <th>Status</th>
+      <th>Data Devolução</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each emprestimos}}
+      <tr>
+        <td>{{this.id}}</td>
+        <td>
+          {{#each ../alunos}}
+            {{#if (eq this.id ../this.idAluno)}}
+              {{this.nome}}
+            {{/if}}
+          {{/each}}
+        </td>
+        <td>
+          {{#each ../livros}}
+            {{#if (eq this.id ../this.idLivro)}}
+              {{this.titulo}}
+            {{/if}}
+          {{/each}}
+        </td>
+        <td>{{this.dataEmprestimo}}</td>
+        <td>{{this.status}}</td>
+        <td>{{this.dataDevolucao}}</td>
+        <td>
+          {{#if (eq this.status "pendente")}}
+            <form action="/emprestimos/{{this.id}}/devolver" method="post" style="display:inline;">
+              <input type="date" name="dataDevolucao" required value="{{../hojeISO}}" />
+              <button type="submit">Registrar Devolução</button>
+            </form>
+          {{else}}
+            <span>Devolvido</span>
+          {{/if}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

@@ -1,0 +1,45 @@
+<form action="/livros" method="post">
+
+  <label for="titulo">Título:</label>
+  <input type="text" id="titulo" name="titulo" required />
+
+  <label for="autor">Autor:</label>
+  <input type="text" id="autor" name="autor" required />
+
+  <label for="genero">Genero: </label>
+  <input type="text" id="genero" name="genero" required />
+
+  <button type="submit">Enviar</button>
+
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>Título</th>
+      <th>Autor</th>
+      <th>Gênero</th>
+      <th colspan="2" style="text-align: center;">Ação</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each livrosAtivos}}
+      <tr>
+        <td>{{this.titulo}}</td>
+        <td>{{this.autor}}</td>
+        <td>{{this.genero}}</td>
+        <td>
+          <form action="/livros/{{this.id}}/excluir" method="POST">
+            <button type="submit">Deletar</button>
+          </form>
+        </td>
+        <td>
+          <button
+            type="button"
+            onclick="openModal('{{this.id}}', '{{this.titulo}}', '{{this.autor}}', '{{this.genero}}')"
+          >Editar</button>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

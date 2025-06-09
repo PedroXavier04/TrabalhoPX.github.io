@@ -1,0 +1,9 @@
+Instalar:
+npm install express express-handlebars
+
+// Configurar Handlebars
+import{resolve} from 'path';
+ // Configura o Handlebars como motor de visualização
+        this.app.engine('handlebars', engine());
+        this.app.set('view engine', 'handlebars');
+        this.app.set('views', resolve(__dirname, 'src', 'views'));

@@ -1,0 +1,100 @@
+Handlebars:
+npm i express-handlebars
+
+res.render('home', {layout:false})
+
+para passar dados no handebars
+views/
+├── layouts/
+│   └── main.handlebars
+└── home.handlebars
+
+
+______________________Main
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>{{titulo}}</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Meu Site</h1>
+    <nav>
+      <a href="/">Home</a>
+    </nav>
+  </header>
+
+  <main>
+    {{{body}}}
+    <!-- O conteúdo de cada página vai ser injetado aqui -->
+  </main>
+
+  <footer>
+    <p>&copy; 2025</p>
+  </footer>
+</body>
+</html>
+__________________________________Home
+<h2>Bem-vindo!</h2>
+<p>Essa é a página inicial usando Handlebars com layout.</p>
+
+
+_________________________________usando if/else
+
+<h2>Bem-vindo, {{usuario.nome}}!</h2>
+
+{{#if usuario.admin}}
+  <p>Você é um administrador. Acesso total ao sistema.</p>
+{{else}}
+  <p>Você é um usuário comum. Acesso limitado.</p>
+{{/if}}
+
+_____________________________________usando arrays
+<h2>Seus pedidos</h2>
+
+{{#if pedidos.length}}
+  <ul>
+    {{#each pedidos}}
+      <li>
+        {{nome}} - R$ {{preco}},00
+      </li>
+    {{/each}}
+  </ul>
+{{else}}
+  <p>Você ainda não fez pedidos.</p>
+{{/if}}
+
+this.app.get('/', (req, res) => {
+  res.render('home', {
+    titulo: 'Pedidos do usuário',
+    pedidos: [
+      { nome: 'Pizza', preco: 25 },
+      { nome: 'Refrigerante', preco: 8 },
+      { nome: 'Sorvete', preco: 10 }
+    ]
+  });
+});
+
+__________________________________________usando o with para simplificar os objetos
+
+<h2>Pedidos do usuário</h2>
+
+{{#if pedidos.length}}
+  <ul>
+    {{#each pedidos}}
+      {{#with this}}
+        <li>
+          <strong>{{nome}}</strong>: R$ {{preco}},00 <br>
+          Categoria: {{categoria.nome}} - {{categoria.descricao}}
+        </li>
+      {{/with}}
+    {{/each}}
+  </ul>
+{{else}}
+  <p>Você ainda não fez pedidos.</p>
+{{/if}}
+
+
+

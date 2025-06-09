@@ -1,0 +1,88 @@
+
+<form action="/alunos" method="post" class="aluno-form">
+
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" required>
+    
+    <label for="idade">Idade:</label>
+    <input type="number" id="idade" name="idade" required>
+    
+    <label for="curso">Curso:</label>
+    <input type="text" id="curso" name="curso" required>
+
+    <button type="submit">Enviar</button>
+
+</form>
+
+<table class="aluno-table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>Curso</th>
+            <th colspan="2" style="text-align: center;">Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each alunosAtivos}}
+        <tr>
+            {{!-- <td>{{this.id}}</td> --}}
+            <td>{{this.nome}}</td>
+            <td>{{this.idade}}</td>
+            <td>{{this.curso}}</td>
+            <td>
+                <form action="/alunos/{{this.id}}"?_method=DELETE method="POST">
+                    <button type="submit">Deletar</button>
+                </form>
+            </td>
+            <td>            
+                    <button type="button" onclick="openModal('{{this.id}}', '{{this.nome}}', '{{this.idade}}', '{{this.curso}}')">Editar</button>
+
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<!-- Modal de Edição -->
+<div id="editModal" class="aluno-modal-overlay">
+  <div class="aluno-modal-content">
+    <h3>Editar Aluno</h3>
+    <form id="editForm" method="post">
+      <input type="hidden" name="_method" value="put">
+      <input type="hidden" id="editId" name="id">
+      
+      <label for="editNome">Nome:</label>
+      <input type="text" id="editNome" name="nome" required><br>
+      
+      <label for="editIdade">Idade:</label>
+      <input type="number" id="editIdade" name="idade" required><br>
+      
+      <label for="editCurso">Curso:</label>
+      <input type="text" id="editCurso" name="curso" required><br><br>
+      
+      <button type="submit">Salvar</button>
+      <button type="button" onclick="closeModal()">Cancelar</button>
+    </form>
+  </div>
+  </div>
+</div>
+
+
+<script>
+  function openModal(id, nome, idade, curso) {
+    document.getElementById('editId').value = id;
+    document.getElementById('editNome').value = nome;
+    document.getElementById('editIdade').value = idade;
+    document.getElementById('editCurso').value = curso;
+
+    const form = document.getElementById('editForm');
+    form.action = `/alunos/${id}/edit`;
+
+    document.getElementById('editModal').style.display = 'block';
+  }
+
+  function closeModal() {
+    document.getElementById('editModal').style.display = 'none';
+  }
+</script>

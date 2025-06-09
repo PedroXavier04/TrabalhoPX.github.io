@@ -1,0 +1,133 @@
+/* Estilo geral do container da página de alunos */
+.aluno-container {
+  padding: 20px;
+}
+
+/* Formulário de cadastro */
+.aluno-form {
+  background-color: #f0f4f8;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.aluno-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.aluno-form input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.aluno-form button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.aluno-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Tabela de alunos */
+.aluno-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.aluno-table th, .aluno-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.aluno-table th {
+  background-color: #007bff;
+  color: white;
+}
+
+.aluno-table td button {
+  padding: 6px 10px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.aluno-table td form {
+  display: inline;
+}
+
+.aluno-table td button[type="submit"] {
+  background-color: #dc3545;
+  color: white;
+}
+
+.aluno-table td button[type="button"] {
+  background-color: #28a745;
+  color: white;
+}
+/* 
+/* Modal */
+.aluno-modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1000;
+}
+
+.aluno-modal-content {
+  background-color: white;
+  margin: 10% auto;
+  padding: 20px;
+  width: 320px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.aluno-modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.aluno-modal-content input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.aluno-modal-content button {
+  padding: 8px 12px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.aluno-modal-content button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+}
+
+.aluno-modal-content button[type="button"] {
+  background-color: #6c757d;
+  color: white;
+} */

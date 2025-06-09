@@ -1,0 +1,64 @@
+<form action="/editoras" method="post">
+  <label for="nome">Nome:</label>
+  <input type="text" id="nome" name="nome" required />
+
+  <label for="cnpj">CNPJ:</label>
+  <input type="text" id="cnpj" name="cnpj" required />
+
+  <button type="submit">Enviar</button>
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>CNPJ</th>
+      <th colspan="2" style="text-align: center;">Ação</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each editorasAtivas}}
+      <tr>
+        <td>{{this.nome}}</td>
+        <td>{{this.cnpj}}</td>
+        <td>
+          <form action="/editoras/{{this.id}}/excluir" method="POST">
+            <button type="submit">Deletar</button>
+          </form>
+        </td>
+        <td>
+          <button
+            type="button"
+            onclick="openModal('{{this.id}}', '{{this.nome}}', '{{this.cnpj}}')"
+          >Editar</button>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<!-- Modal para edição -->
+<div id="editModal" style="display:none;">
+  <form id="editForm" method="POST">
+    <input type="hidden" name="_method" value="put" />
+    <input type="hidden" id="editId" name="id" />
+
+    <label for="editNome">Nome:</label>
+    <input type="text" id="editNome" name="nome" required />
+
+    <label for="editCnpj">CNPJ:</label>
+    <input type="text" id="editCnpj" name="cnpj" required />
+
+    <button type="submit">Salvar</button>
+    <button type="button" onclick="closeModal()">Cancelar</button>
+  </form>
+</div>
+
+<script>
+  function openModal(id, nome, cnpj) { document.getElementById('editId').value =
+  id; document.getElementById('editNome').value = nome;
+  document.getElementById('editCnpj').value = cnpj; const form =
+  document.getElementById('editForm'); form.action = `/editoras/${id}/edit`;
+  document.getElementById('editModal').style.display = 'block'; } function
+  closeModal() { document.getElementById('editModal').style.display = 'none'; }
+</script>
