@@ -41,6 +41,27 @@ class LivroController {
     livro.genero = genero;
     res.redirect("/livros");
   }
+  exibirFormularioEdicao(req, res) {
+    const { id } = req.params;
+    const livro = livros.find((livro) => livro.id == id);
+  
+    if (!livro) return res.status(404).send("Livro não encontrado");
+  
+    res.render("livros/editar", { livro });
+  }
+  atualizarLivro(req, res) {
+    const { id } = req.params;
+    const { autor, titulo, genero } = req.body;
+    const livro = livros.find((livro) => livro.id == id);
+  
+    if (!livro) return res.status(404).send("Livro não encontrado");
+  
+    livro.autor = autor;
+    livro.titulo = titulo;
+    livro.genero = genero;
+  
+    res.redirect("/livros");
+  }
 }
 
 export default new LivroController();

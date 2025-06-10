@@ -24,36 +24,23 @@ class App {
   }
 
   middleware() {
-    //configura o middleware
-    //configurando o engine de template handlebars
-    // Configura o Handlebars como motor de visualização
-    this.app.engine("handlebars", engine());
+    this.app.engine(
+      "handlebars",
+      engine({
+        helpers: {
+          eq: function (a, b) {
+            return a === b;
+          },
+        },
+      })
+    );
     this.app.set("view engine", "handlebars");
     this.app.set("views", resolve(__dirname, "src", "views"));
 
-    //configurar pasta public
     this.app.use(express.static(resolve(__dirname, "public")));
-
     this.app.use(express.json());
-    //o express.json() é um middleware que faz o parse do corpo da requisição
-    //para o formato json, ou seja, transforma o corpo da requisição em um objeto javascript
-    //usado para receber dados no formato json
-    //exemplo: { "name": "Lucas" } -> { name: "Lucas" }
-
     this.app.use(express.urlencoded({ extended: true }));
-    //o express.urlencoded() é um middleware que faz o parse do corpo da requisição
-    //para o formato urlencoded, ou seja, transforma o corpo da requisição em um objeto javascript
-    //usado para receber dados no formato urlencoded
-    //exemplo: name=Lucas -> { name: "Lucas" }
-    //html forms geralmente usam esse formato
-
-    this.app.use(methodOverride("_method")); // Configura o método de substituição para permitir PUT e DELETE via POST
-    //o methodOverride é um middleware que permite usar métodos HTTP diferentes do padrão
-    //ou seja, permite usar métodos como PUT e DELETE em formulários HTML
-    //o método padrão para formulários HTML é o POST
-    //então o methodOverride permite usar o método PUT e DELETE em formulários HTML
-    //exemplo: <form action="/alunos/1?_method=PUT" method="POST">
-    //o método PUT é usado para atualizar um recurso
+    this.app.use(methodOverride("_method"));
   }
   routes() {
     this.app.use("/", homeRoutes);
