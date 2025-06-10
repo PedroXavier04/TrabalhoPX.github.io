@@ -1,9 +1,8 @@
 class Livro {
   static id = 0;
   static incrementId() {
-    return ++Livro.id; // Corrigido para iniciar em 1
+    return Livro.id++;
   }
-
   constructor(autor, titulo, genero) {
     this.autor = autor;
     this.titulo = titulo;
@@ -17,8 +16,8 @@ const livros = [];
 
 class LivroController {
   listarLivros(req, res) {
-    const livrosAtivos = livros.filter((livro) => livro.ativo === true);
-    res.render("livro", { livros: livrosAtivos });
+    const livrosAtivos = livros.filter((livro) => livro.ativo == true);
+    res.render("livro", { livrosAtivos });
   }
 
   cadastrarLivro(req, res) {
@@ -27,37 +26,40 @@ class LivroController {
     livros.push(novoLivro);
     res.redirect("/livros");
   }
-
   excluirLivro(req, res) {
     const { id } = req.params;
     const livro = livros.find((livro) => livro.id == id);
-    if (livro) {
-      livro.ativo = false;
-    }
+    livro.ativo = false;
     res.redirect("/livros");
   }
-
-  // Exibe o formulário de edição
+  editarLivro(req, res) {
+    const { id } = req.params;
+    const { autor, titulo, genero } = req.body;
+    const livro = livros.find((livro) => livro.id == id);
+    livro.autor = autor;
+    livro.titulo = titulo;
+    livro.genero = genero;
+    res.redirect("/livros");
+  }
   exibirFormularioEdicao(req, res) {
     const { id } = req.params;
     const livro = livros.find((livro) => livro.id == id);
-    if (!livro) {
-      return res.status(404).send("Livro não encontrado");
-    }
-    res.render("editarLivro", { livro }); // nome do template: editarLivro.handlebars
-  }
 
-  // Salva a edição
+    if (!livro) return res.status(404).send("Livro não encontrado");
+
+    res.render("livros/editar", { livro });
+  }
   atualizarLivro(req, res) {
     const { id } = req.params;
     const { autor, titulo, genero } = req.body;
     const livro = livros.find((livro) => livro.id == id);
-    if (!livro) {
-      return res.status(404).send("Livro não encontrado");
-    }
+
+    if (!livro) return res.status(404).send("Livro não encontrado");
+
     livro.autor = autor;
     livro.titulo = titulo;
     livro.genero = genero;
+
     res.redirect("/livros");
   }
 }
