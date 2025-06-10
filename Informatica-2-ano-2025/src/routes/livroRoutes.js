@@ -5,8 +5,8 @@ const router = Router();
 
 router.get("/", LivroController.listarLivros);
 router.post("/", LivroController.cadastrarLivro);
-router.get("/:id/edit", LivroController.editarLivro);
-router.put("/:id", LivroController.atualizarLivro); // <- ESTA LINHA É IMPORTANTE
+router.get("/:id/edit", LivroController.exibirFormularioEdicao);
+router.put("/:id", LivroController.atualizarLivro);
 router.post("/:id/excluir", LivroController.excluirLivro);
 
 export default router;
